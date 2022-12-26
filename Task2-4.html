@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="Task2-4.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="form">
+      <input
+        class="m-1 form-input rounded-xl"
+        name="email"
+        type="email"
+        placeholder="email"
+      />
+      <input
+        class="m-1 form-input rounded-xl"
+        name="password"
+        type="password"
+        placeholder="password"
+      />
+      <input
+        class="m-1 form-input rounded-xl"
+        name="phone"
+        type="text"
+        placeholder="phone"
+      />
+
+      <button
+        class="btn btn-primary rounded-xl btn-block mb-5 text-secondary m-1"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+
+    <div id="feeds"></div>
+    <script>
+      const inputForm = document.querySelector(".form");
+
+      inputForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(inputForm);
+        const data = new URLSearchParams(formData);
+
+        fetch("https://63a9225d100b7737b98a9f4c.mockapi.io/signup", {
+          method: "POST",
+          body: data,
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.log(error));
+      });
+
+      fetcher("GET", "signup").then((data) => {
+        document.getElementById("feeds").innerHTML = data
+          .map(
+            (item) => `
+                <div class='card-feeds m-1 btn-third'>
+                    <div class = "p-10">${item.email}</div>
+                    <div class = "p-10">${item.password}</div>
+                    <div class = "p-10">${item.phone}</div>
+                    <button class = "p-10 ml-1" onclick='deleteData(${item.id})'>delete</button>
+                </div>
+                `
+          )
+          .join("");
+      });
+    </script>
+  </body>
+</html>
