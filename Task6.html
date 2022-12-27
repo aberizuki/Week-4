@@ -1,0 +1,35 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="Task6.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="feeds"></div>
+    <script>
+      fetcher("GET", "users").then((data) => {
+        document.getElementById("feeds").innerHTML = data
+          .map(
+            (item) => `
+                <div class='card-feeds m-1 btn-third'>
+                    <div class = "p-10">id: ${item.id}</div>
+                    <div class = "p-10">name: ${item.name}</div>
+                    <div class = "p-10">username: ${item.username}</div>
+                    <div class = "p-10">email: ${item.email}</div>
+                    <div class = "p-10">street: ${item.address.street}</div>
+                    <div class = "p-10">suite: ${item.address.suite}</div>
+                    <div class = "p-10">city: ${item.address.city}</div>
+                    <div class = "p-10">zipcode: ${item.address.zipcode}</div>
+                    <div class = "p-10">geo lat: ${item.address.geo.lat}</div>
+                    <div class = "p-10">geo lng: ${item.address.geo.lng}</div>
+                </div>
+                `
+          )
+          .join("");
+      });
+    </script>
+  </body>
+</html>
