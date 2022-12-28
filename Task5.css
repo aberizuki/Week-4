@@ -20,7 +20,7 @@ label.logo {
   color: white;
   font-size: 35px;
   line-height: 80px;
-  padding: 0 100px;
+  padding: 0 40px;
   font-weight: bold;
 }
 nav ul {
@@ -99,5 +99,5 @@ a:hover {
 section {
   background: url(nogi.jpg) no-repeat;
   background-size: cover;
-  height: calc(100vh - 80px);
+  height: 100vh;
 }

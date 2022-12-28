@@ -33,8 +33,7 @@ const deleteData = (id) => {
         return res.json();
       })
       .then((data) => {
-        alert("data berhasil dihapus");
-        window.location.reload();
+        document.getElementById(`genCont${data.id}`).remove();
       })
       .catch((err) => console.error(err));
   } else {

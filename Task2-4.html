@@ -51,25 +51,31 @@
           method: "POST",
           body: data,
         })
-          .then((res) => {
-            if (res.status == 201) {
-              location.reload();
-              return res.json();
-            }
+          .then((res) => res.json())
+          .then((data) => {
+            document.getElementById("feeds").insertAdjacentHTML(
+              "beforeend",
+              `<div id="genCont${data.id}" class="card-feeds m-1 btn-third"> 
+                     <div class = "p-10">${data.email}</div>
+                     <div class = "p-10">${data.password}</div>
+                     <div class = "p-10">${data.phone}</div>
+                     <button class="p-10 ml-1" onclick='deleteData(${data.id})'>delete</button>
+                 </div>
+                 `
+            );
           })
-          .then((data) => console.log(data))
           .catch((error) => console.log(error));
       });
 
       fetcher("GET", "signup").then((data) => {
         document.getElementById("feeds").innerHTML = data
           .map(
-            (item) => `
+            (data) => `
                 <div class='card-feeds m-1 btn-third'>
-                    <div class = "p-10">${item.email}</div>
-                    <div class = "p-10">${item.password}</div>
-                    <div class = "p-10">${item.phone}</div>
-                    <button class = "p-10 ml-1" onclick='deleteData(${item.id})'>delete</button>
+                    <div class = "p-10">${data.email}</div>
+                    <div class = "p-10">${data.password}</div>
+                    <div class = "p-10">${data.phone}</div>
+                    <button class = "p-10 ml-1" onclick='deleteData(${data.id})'>delete</button>
                 </div>
                 `
           )

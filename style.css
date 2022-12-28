@@ -422,3 +422,10 @@ body {
   background-color: #04aa6d;
   color: white;
 }
+
+#feeds {
+  display: flex;
+  flex-wrap: wrap;
+  height: 32vh;
+  width: auto;
+}
